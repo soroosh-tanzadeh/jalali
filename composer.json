@@ -1,5 +1,5 @@
 {
-    "name": "morilog/jalali",
+    "name": "soroosh/jalali",
     "description": "This Package helps developers to easily work with Jalali (Shamsi or Iranian) dates in PHP applications, based on Jalali (Shamsi) DateTime class.",
     "license": "MIT",
     "type": "library",
@@ -8,23 +8,33 @@
             "name": "Milad Rey",
             "email": "miladr@gmail.com"
         },
-	{
-		"name": "Morteza Parvini",
-		"email": "m.parvini@outlook.com"
-	}
+        {
+            "name": "Morteza Parvini",
+            "email": "m.parvini@outlook.com"
+        },
+        {
+            "name": "Soroosh Tanzadeh",
+            "email": "soroosh@ternobo.com"
+        }
     ],
-    "keywords": ["Laravel","Date","Datetime","Jalali", "Morilog"],
+    "keywords": [
+        "Laravel",
+        "Date",
+        "Datetime",
+        "Jalali",
+        "Morilog"
+    ],
     "require": {
         "php": "^7.0 | ^7.1 | ^7.2 | ^8.0",
         "nesbot/carbon": "^1.21 || ^2.0",
         "beberlei/assert": "3.*"
     },
-    "require-dev" : {
+    "require-dev": {
         "phpunit/phpunit": "~4.0"
-    },  
+    },
     "autoload": {
         "psr-4": {
-            "Morilog\\Jalali\\": "src"
+            "Soroosh\\Jalali\\": "src"
         },
         "files": [
             "src/helpers.php"
@@ -32,7 +42,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Morilog\\Jalali\\Tests\\": "tests/"
+            "Soroosh\\Jalali\\Tests\\": "tests/"
         }
     },
     "minimum-stablity": "dev"
