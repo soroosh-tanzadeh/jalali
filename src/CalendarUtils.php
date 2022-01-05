@@ -1,11 +1,12 @@
 <?php
-namespace Morilog\Jalali;
+
+namespace Soroosh\Jalali;
 
 use Carbon\Carbon;
 
 /**
  * Class jDateTime
- * @package Morilog\Jalali
+ * @package Soroosh\Jalali
  */
 class CalendarUtils
 {
@@ -59,8 +60,8 @@ class CalendarUtils
         $day = $georgianDateArr[2];
         $georgianDate = new \DateTime();
         $georgianDate->setDate($year, $month, $day);
-        
-        
+
+
         return $georgianDate;
     }
 
@@ -75,8 +76,8 @@ class CalendarUtils
     public static function isValidateJalaliDate($jy, $jm, $jd)
     {
         return $jy >= -61 && $jy <= 3177
-        && $jm >= 1 && $jm <= 12
-        && $jd >= 1 && $jd <= self::jalaliMonthLength($jy, $jm);
+            && $jm >= 1 && $jm <= 12
+            && $jd >= 1 && $jd <= self::jalaliMonthLength($jy, $jm);
     }
 
     /**
@@ -141,8 +142,8 @@ class CalendarUtils
      */
     public static function jalaliCal($jy)
     {
-        $breaks = [-61, 9, 38, 199, 426, 686, 756, 818, 1111, 1181, 1210
-            , 1635, 2060, 2097, 2192, 2262, 2324, 2394, 2456, 3178
+        $breaks = [
+            -61, 9, 38, 199, 426, 686, 756, 818, 1111, 1181, 1210, 1635, 2060, 2097, 2192, 2262, 2324, 2394, 2456, 3178
         ];
 
         $breaksCount = count($breaks);
@@ -250,12 +251,10 @@ class CalendarUtils
      */
     public static function g2d($gy, $gm, $gd)
     {
-        return (
-            self::div(($gy + self::div($gm - 8, 6) + 100100) * 1461, 4)
+        return (self::div(($gy + self::div($gm - 8, 6) + 100100) * 1461, 4)
             + self::div(153 * self::mod($gm + 9, 12) + 2, 5)
             + $gd - 34840408
         ) - self::div(self::div($gy + 100100 + self::div($gm - 8, 6), 100) * 3, 4) + 752;
-
     }
 
     /**
@@ -378,7 +377,7 @@ class CalendarUtils
 
             $v = '';
             switch ($key) {
-                //Day
+                    //Day
                 case 'd':
                     $v = sprintf("%02d", $jDay);
                     break;
@@ -408,11 +407,11 @@ class CalendarUtils
                     }
                     self::$temp['z'] = $v;
                     break;
-                //Week
+                    //Week
                 case 'W':
                     $v = is_int(self::$temp['z'] / 7) ? (self::$temp['z'] / 7) : intval(self::$temp['z'] / 7 + 1);
                     break;
-                //Month
+                    //Month
                 case 'F':
                     $v = self::getMonthNames($jMonth);
                     break;
@@ -428,7 +427,7 @@ class CalendarUtils
                 case 't':
                     $v = ($jMonth == 12) ? (self::isLeapJalaliYear($jYear) ? 30 : 29) : ($jMonth > 6 ? 30 : 31);
                     break;
-                //Year
+                    //Year
                 case 'L':
                     $tmpObj = static::createDateTime(time() - 31536000, $timezone);
                     $v = $tmpObj->format('L');
@@ -443,34 +442,34 @@ class CalendarUtils
                         $v = '0' . $v;
                     }
                     break;
-                //Time
+                    //Time
                 case 'a':
                     $v = ($dateTime->format('a') == 'am') ? 'ق.ظ' : 'ب.ظ';
                     break;
                 case 'A':
                     $v = ($dateTime->format('A') == 'AM') ? 'قبل از ظهر' : 'بعد از ظهر';
                     break;
-                //Full Dates
+                    //Full Dates
                 case 'c':
                     $v = $jYear . '-' . sprintf("%02d", $jMonth) . '-' . sprintf("%02d", $jDay) . 'T';
                     $v .= $dateTime->format('H') . ':' . $dateTime->format('i') . ':' . $dateTime->format('s') . $dateTime->format('P');
                     break;
                 case 'r':
-                    $v = self::getDayNames($dateTime->format('D'), true) . ', ' . sprintf("%02d",
-                            $jDay) . ' ' . self::getMonthNames($jMonth, true);
+                    $v = self::getDayNames($dateTime->format('D'), true) . ', ' . sprintf(
+                        "%02d",
+                        $jDay
+                    ) . ' ' . self::getMonthNames($jMonth, true);
                     $v .= ' ' . $jYear . ' ' . $dateTime->format('H') . ':' . $dateTime->format('i') . ':' . $dateTime->format('s') . ' ' . $dateTime->format('P');
                     break;
-                //Timezone
+                    //Timezone
                 case 'e':
                     $v = $dateTime->format('e');
                     break;
                 case 'T':
                     $v = $dateTime->format('T');
                     break;
-
             }
             $values[$k] = $v;
-
         }
         //End Changed Keys
 
@@ -679,7 +678,6 @@ class CalendarUtils
             if (!in_array($v, $needle) && !in_array($v, $always)) {
                 unset($haystack[$k]);
             }
-
         }
 
 
@@ -798,7 +796,7 @@ class CalendarUtils
     public static function createCarbonFromFormat($format, $str, $timezone = null)
     {
         $dateTime = self::createDatetimeFromFormat($format, $str, $timezone);
-        
+
         return Carbon::createFromTimestamp($dateTime->getTimestamp(), $dateTime->getTimezone());
     }
 
@@ -869,6 +867,5 @@ class CalendarUtils
 
 
         throw new \InvalidArgumentException('timezone is not valid');
-
     }
 }

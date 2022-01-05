@@ -1,6 +1,6 @@
 <?php
 
-namespace Morilog\Jalali;
+namespace Soroosh\Jalali;
 
 use Assert\Assertion;
 use Carbon\Carbon;

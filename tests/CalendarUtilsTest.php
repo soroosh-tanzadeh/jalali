@@ -1,11 +1,11 @@
 <?php
 
-namespace Morilog\Jalali\Tests;
+namespace Soroosh\Jalali\Tests;
 
 use DateTime;
 use DateTimeZone;
-use Morilog\Jalali\CalendarUtils;
-use Morilog\Jalali\Jalalian;
+use Soroosh\Jalali\CalendarUtils;
+use Soroosh\Jalali\Jalalian;
 use PHPUnit\Framework\TestCase;
 
 class CalendarUtilsTest extends TestCase
@@ -39,12 +39,16 @@ class CalendarUtilsTest extends TestCase
     public function testStrftime()
     {
         $this->assertTrue(CalendarUtils::strftime('Y-m-d', strtotime('2016-05-8')) === '1395-02-19');
-        $this->assertTrue(CalendarUtils::convertNumbers(CalendarUtils::strftime('Y-m-d',
-                strtotime('2016-05-8'))) === '۱۳۹۵-۰۲-۱۹');
+        $this->assertTrue(CalendarUtils::convertNumbers(CalendarUtils::strftime(
+            'Y-m-d',
+            strtotime('2016-05-8')
+        )) === '۱۳۹۵-۰۲-۱۹');
 
         $dateString = CalendarUtils::convertNumbers('۱۳۹۵-۰۲-۱۹', true); // 1395-02-19
-        $this->assertTrue(CalendarUtils::createCarbonFromFormat('Y-m-d',
-                $dateString)->format('Y-m-d') === '2016-05-08');
+        $this->assertTrue(CalendarUtils::createCarbonFromFormat(
+            'Y-m-d',
+            $dateString
+        )->format('Y-m-d') === '2016-05-08');
         $this->assertFalse(CalendarUtils::strftime('Y-m-d', strtotime('2016-05-8')) === '۱۳۹۵-۰۲-۱۹');
     }
 
@@ -86,7 +90,6 @@ class CalendarUtilsTest extends TestCase
         $jalaiDateTimeFormatted = Jalalian::fromDateTime($carbon->toDateTimeString())->format('Y-m-d H:i:s');
         $this->assertFalse($jalaiDateFormatted === '1394-11-25 15:00:00');
         $this->assertTrue($jalaiDateTimeFormatted === '1394-11-25 15:00:00');
-
     }
 
     public function testTimezone()
@@ -104,7 +107,6 @@ class CalendarUtilsTest extends TestCase
         $tzOffset = $this->getTimeZoneOffset('Asia/Tehran', 'UTC');
 
         $this->assertTrue((((($utcHour * 60) + $utcMin) * 60) - ((($tehranHour * 60) + $tehranMin) * 60)) === $tzOffset);
-
     }
 
 
