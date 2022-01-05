@@ -316,13 +316,13 @@ class Jalalian
     /**
      * @return Carbon
      */
-    public function toCarbon(): Carbon
+    public function toCarbon(bool $dateOnly = false): Carbon
     {
         $gDate = CalendarUtils::toGregorian($this->getYear(), $this->getMonth(), $this->getDay());
         $carbon = Carbon::createFromDate($gDate[0], $gDate[1], $gDate[2], $this->getTimezone());
-
-        $carbon->setTime($this->getHour(), $this->getMinute(), $this->getSecond());
-
+        if (!$dateOnly) {
+            $carbon->setTime($this->getHour(), $this->getMinute(), $this->getSecond());
+        }
         return $carbon;
     }
 
