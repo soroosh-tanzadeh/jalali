@@ -11,15 +11,10 @@ soroosh/jalali
 - DateTime manipulating API
 - DateTime comparing API
 - Immutable
-
-## Installation Version 3.*
-> If you are using version <= 2.*, please read [old docs](https://github.com/morilog/jalali/blob/v2.3.0/README.md)
-#### Requirements:
-- `php >= 7.0`
-
+- 
 Run the Composer update command
 
-    $ composer require morilog/jalali:3.*
+    $ composer require soroosh/jalali:3.*
 
 <a name="basic-usage"></a>
 ## Basic Usage
@@ -29,7 +24,7 @@ In version >= 1.1,  you can use `jdate()` instead of `Jalalian::forge()`;
 #### `now([$timestamp = null])`
 ``` php
 // the default timestamp is Now
-$date = \Morilog\Jalali\Jalalian::now()
+$date = \Soroosh\Jalali\Jalalian::now()
 // OR
 $date = jdate();
 
